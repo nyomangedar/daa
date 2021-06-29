@@ -169,9 +169,11 @@ public class GenomeAssembly {
 
 	// main function to run the program.
 	public static void main(String[] args) {
+		long startime = System.nanoTime();
 		Vertex[] graph = getReads(); // get the reads.
 		makeOverlapGraph(graph); // make overlap graph.
 		String genome = findHamiltonianPath(graph); // find hamiltonian path.
 		System.out.println(genome); // print the genome.
+		System.out.println("Running time = " + (System.nanoTime() - startime) + "ns");
 	}
 }
