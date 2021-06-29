@@ -71,11 +71,11 @@ public class GenomeAssemblyDeBruijn {
 																									// with the string.
 
 		int id = 0; // to give unique id to the strings.
-
-		String[] testcase ={ "GGA", "CCC", "TTG", "CGT", "TCT", "TTC", "GTT", "TAT", "TTC", "AGC", "ATG", "GTC", "CCT", "ACG", "TCT", "AGC", "TCT", "TGT", "ACG", "CCT", "TCG", "TGC", "TCG", "GGG", "CTC", "ACC", "TTC", "GTG", "GGG", "TAT", "CTA", "TCT", "ACT", "GTA", "GCC", "ATT", "GCC", "TAC", "CAT", "CGA", "ACG", "GGC", "TAC", "TGG", "GGT", "GTA", "ATC", "ATT", "CCT", "TCA", };
+		String[] testcase = { "tca", "caa", "aaa", "aac", "acg", "cgt", "gtc", "tcg", "cgc", "gcc", "ccg", "cgt", "gtt", "ttt", "ttg", "tgg", "ggc", "gct", "ctg", "tgc", "gcc", "ccc", "ccc", "cca", "cat", "atc", "tct", "ctg", "tgg", "ggc", "gct", "ctt", "ttc", "tcc", "ccc", "ccg", "cga", "gag", "agc", "gca", "cat", "atg",
+				"tgg", "ggg", "ggc", "gcc", "ccc", "ccg", "cgc", "gcc", "ccg", "cgt", "gtg", "tgg", "ggg", "ggc", "gcc", "ccc", "cca", "cac", "act", "ctt", "ttc", "tct", "cta", "taa", "aac", "act", "ctc", "tct", "ctg", "tgc", "gcc", "ccg", "cgc", "gcg", "cgg", "ggc", "gct", "ctg", "tgc", "gcg", "cgg", "ggc", "gct", "cta", "tac", "act", "cta", "taa", "aag", "agt", "gtt", "ttg", "tga", "gag", "agt", "gtt", "tta", "taa", };
 
 		// read the k-mer;
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < testcase.length; i++) {
 			String str = testcase[i]; // get the kmer.
 			String a = str.substring(0, str.length() - 1); // split into two parts. (0-k-1) and (1-k) strings.
 			String b = str.substring(1); // 1-k string (a and b are going to be the values of 'str' in the 'vertex'
@@ -130,7 +130,7 @@ public class GenomeAssemblyDeBruijn {
 	}
 
 	// function to find an eulerian cycle in the graph.
-	public static void findCycle(Vertex[] graph) {
+	public static String findCycle(Vertex[] graph) {
 		List<Integer> cycle = new ArrayList<Integer>();
 		explore(graph, 0, cycle);
 
@@ -139,11 +139,12 @@ public class GenomeAssemblyDeBruijn {
 		for (int i = cycle.size() - 2; i > -1; i--) {
 			String temp = graph[cycle.get(i)].str;
 			genome = genome + temp.charAt(temp.length() - 1);
+
 		}
 
 		// printed from 9 because k-mer size is 10 and since it is circular genome so
 		// last 9 chars and first 9 chars are same.
-		System.out.println(genome.substring(0));
+		return genome.substring(0);
 	}
 
 	// function finds the eulerian cycle.
@@ -160,15 +161,18 @@ public class GenomeAssemblyDeBruijn {
 	}
 
 	// function run. Used it so as to avoid stack overflow problem by using threads.
-	public void run() throws IOException {
+	public String run() throws IOException {
 		Vertex[] graph = reader();
-		findCycle(graph);
+		return findCycle(graph);
 	}
 
 	// main function to run the program.
 	public static void main(String[] args) throws IOException {
-		long starttime = System.nanoTime();
-		new GenomeAssemblyDeBruijn().run();
-		System.out.println((System.nanoTime() - starttime) + "ns");
+		String genome = "";
+			long starttime = System.nanoTime();
+			genome = new GenomeAssemblyDeBruijn().run();
+			long elapsedtime = System.nanoTime() - starttime;
+			System.out.println("Running time = " + elapsedtime + "ns");
+		System.out.println("Genome result: " + genome);
 	}
 }

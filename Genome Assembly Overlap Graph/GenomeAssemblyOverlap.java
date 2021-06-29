@@ -12,10 +12,13 @@ public class GenomeAssemblyOverlap {
 	// function to get the input reads of the genome.
 	public static Vertex[] getReads() {
 		FastReader s = new FastReader();
-		Vertex[] graph = new Vertex[6];
+		String[] testcase = {  };
+
+		Vertex[] graph = new Vertex[testcase.length];
 
 		for (int i = 0; i < graph.length; i++) {
-			graph[i] = new Vertex(i, s.nextLine());
+			Vertex temp = new Vertex(i, testcase[i]);
+			graph[i] = temp;
 		}
 		return graph;
 	}
@@ -263,8 +266,7 @@ public class GenomeAssemblyOverlap {
 			int length = graph[last].edges.get(first);
 			return genome.substring(length);
 		}
-		System.out.println(findShortestSuperstring(path, path.size()));
-		return genome;
+		return findShortestSuperstring(path, path.size());
 	}
 
 	// function to explore the given vertex index.
@@ -291,11 +293,13 @@ public class GenomeAssemblyOverlap {
 
 	// main function to run the program.
 	public static void main(String[] args) {
-		long startime = System.nanoTime();
-		Vertex[] graph = getReads(); // get the reads.
-		makeOverlapGraph(graph); // make overlap graph.
-		String genome = findHamiltonianPath(graph); // find hamiltonian path.
-		System.out.println(genome); // print the genome.
-		System.out.println("Running time = " + (System.nanoTime() - startime) + "ns");
+		String genome = "";
+			long startime = System.nanoTime();
+			Vertex[] graph = getReads(); // get the reads.
+			makeOverlapGraph(graph); // make overlap graph.
+			genome = findHamiltonianPath(graph); // find hamiltonian path.
+			long elapsedtime = System.nanoTime()-startime;
+			System.out.println("Running time = " + elapsedtime + "ns");
+		System.out.println("Genome result: " + genome);
 	}
 }
