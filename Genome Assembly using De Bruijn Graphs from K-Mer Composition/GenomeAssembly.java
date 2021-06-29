@@ -73,7 +73,7 @@ public class GenomeAssembly {
 		int id = 0; // to give unique id to the strings.
 
 		// read the k-mer;
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 1000; i++) {
 			String str = fr.nextLine(); // get the kmer.
 			String a = str.substring(0, str.length() - 1); // split into two parts. (0-k-1) and (1-k) strings.
 			String b = str.substring(1); // 1-k string (a and b are going to be the values of 'str' in the 'vertex'
@@ -141,7 +141,7 @@ public class GenomeAssembly {
 
 		// printed from 9 because k-mer size is 10 and since it is circular genome so
 		// last 9 chars and first 9 chars are same.
-		System.out.println(genome.substring(9));
+		System.out.println(genome.substring(0));
 	}
 
 	// function finds the eulerian cycle.
@@ -165,13 +165,8 @@ public class GenomeAssembly {
 
 	// main function to run the program.
 	public static void main(String[] args) throws IOException {
-		new Thread(null, new Runnable() {
-			public void run() {
-				try {
-					new GenomeAssembly().run();
-				} catch (IOException e) {
-				}
-			}
-		}, "1", 1 << 26).start();
+		long starttime = System.nanoTime();
+		new GenomeAssembly().run();
+		System.out.println((System.nanoTime() - starttime) + "ns");
 	}
 }

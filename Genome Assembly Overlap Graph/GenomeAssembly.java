@@ -120,14 +120,18 @@ public class GenomeAssembly {
 	// choosing the next vertex with max overlap length.
 	private static String findHamiltonianPath(Vertex[] graph) {
 		String genome = "";
-		int random = (int) (Math.random() * (graph.length - 2) + 1); // starting with randomly picked vertex.
+		int random = 0; // starting with randomly picked vertex.
+		System.out.println(random);
 		int first = random;
 
 		genome = genome + graph[random].read;
+		System.out.println(genome);
 		genome = explore(graph, random, genome);
+		System.out.println(genome);
 
 		for (int i = 0; i < graph.length; i++) {
 			if (!graph[i].found) {
+				System.out.println(genome);
 				genome = genome + graph[i].read;
 				last = i;
 			}
