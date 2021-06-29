@@ -1,5 +1,4 @@
 (5)
-Superstring: TGGACGAAGGTTCCT
 reads:
 TGG
 ACG
