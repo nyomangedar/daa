@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class GenomeAssembly {
+public class GenomeAssemblyDeBruijn {
 	// class for reading the k-mers of the genome.
 	static class FastReader {
 		BufferedReader br;
@@ -72,9 +72,11 @@ public class GenomeAssembly {
 
 		int id = 0; // to give unique id to the strings.
 
+		String[] testcase ={ "GGA", "CCC", "TTG", "CGT", "TCT", "TTC", "GTT", "TAT", "TTC", "AGC", "ATG", "GTC", "CCT", "ACG", "TCT", "AGC", "TCT", "TGT", "ACG", "CCT", "TCG", "TGC", "TCG", "GGG", "CTC", "ACC", "TTC", "GTG", "GGG", "TAT", "CTA", "TCT", "ACT", "GTA", "GCC", "ATT", "GCC", "TAC", "CAT", "CGA", "ACG", "GGC", "TAC", "TGG", "GGT", "GTA", "ATC", "ATT", "CCT", "TCA", };
+
 		// read the k-mer;
-		for (int i = 0; i < 1000; i++) {
-			String str = fr.nextLine(); // get the kmer.
+		for (int i = 0; i < 6; i++) {
+			String str = testcase[i]; // get the kmer.
 			String a = str.substring(0, str.length() - 1); // split into two parts. (0-k-1) and (1-k) strings.
 			String b = str.substring(1); // 1-k string (a and b are going to be the values of 'str' in the 'vertex'
 											// class.)
@@ -166,7 +168,7 @@ public class GenomeAssembly {
 	// main function to run the program.
 	public static void main(String[] args) throws IOException {
 		long starttime = System.nanoTime();
-		new GenomeAssembly().run();
+		new GenomeAssemblyDeBruijn().run();
 		System.out.println((System.nanoTime() - starttime) + "ns");
 	}
 }
