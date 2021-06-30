@@ -1,8 +1,0 @@
-(5)
-Superstring: TGGACGAAGGTTCCT
-reads:
-TGG
-ACG
-AAG
-GTT
-CCT
